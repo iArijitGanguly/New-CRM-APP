@@ -12,6 +12,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.4",
     "@types/react-redux": "^7.1.33",
+    "axios": "^1.6.8",
     "eslint-plugin-simple-import-sort": "^12.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
