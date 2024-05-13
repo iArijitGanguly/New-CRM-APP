@@ -1,9 +1,9 @@
-import Login from './pages/auth/Login';
+import MainRouter from './routes/MainRouter';
 
 const App: React.FC = () => {
   return (
     <div>
-      <Login />
+      <MainRouter />
     </div>
   );
 };
