@@ -1,5 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import { login } from '../../redux/slices/AuthSlice';
 import { AppDispatch } from '../../redux/store';
@@ -7,6 +8,7 @@ import { LoginData } from '../../types/LoginData';
 
 const Login: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
   const[loginData, setLoginData] = useState<LoginData>({
     email: '',
@@ -15,16 +17,26 @@ const Login: React.FC = () => {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
+    setLoginData((prevData) => {
+      return {
+        ...prevData,
+        [name]: value
+      };
+    });
+  };
+
+  const restLoginState = () => {
     setLoginData({
-      ...loginData,
-      [name]: value
+      email: '',
+      password: ''
     });
   };
 
   const handleSubmit = async () => {
     if(!loginData.email || !loginData.password) return;
     const response = await dispatch(login(loginData));
-    console.log(response);
+    if(response.payload) navigate('/');
+    else restLoginState();
   };
 
   return(
@@ -36,6 +48,7 @@ const Login: React.FC = () => {
             type="text"
             placeholder="Email"
             name="email"
+            value={loginData.email}
             onChange={handleChange}
             className="input input-bordered input-success w-full max-w-xs text-white focus:outline-none mb-3"
           />
@@ -43,6 +56,7 @@ const Login: React.FC = () => {
             type="password"
             placeholder="Password"
             name="password"
+            value={loginData.password}
             onChange={handleChange}
             className="input input-bordered input-success w-full max-w-xs text-white focus:outline-none mb-3"
           />
