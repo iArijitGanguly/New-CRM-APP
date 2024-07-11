@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { login } from '../../redux/slices/AuthSlice';
 import { AppDispatch } from '../../redux/store';
@@ -68,6 +68,9 @@ const Login: React.FC = () => {
             Submit
             </button>
           </div>
+          <p className='text-white'>
+            Do not Have an account ? <Link to='/signup' className='btn-accent font-semibold hover:text-white'>Signup Instead</Link>
+          </p>
         </div>
       </div>
     </div>
